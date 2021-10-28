@@ -1,138 +1,134 @@
+import Particles from "react-particles-js"
 import { Suspense } from "react"
 import { Image, Link, BlitzPage, useMutation, Routes } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 import logout from "app/auth/mutations/logout"
 import logo from "public/logo.png"
-
+import moon from "public/moon.png"
 /*
  * This file is just for a pleasant getting started page for your new app.
  * You can delete everything in here and start from scratch if you like.
  */
 
-const UserInfo = () => {
-  const currentUser = useCurrentUser()
-  const [logoutMutation] = useMutation(logout)
+// const UserInfo = () => {
+//   const currentUser = useCurrentUser()
+//   const [logoutMutation] = useMutation(logout)
 
-  if (currentUser) {
-    return (
-      <>
-        <button
-          className="button small"
-          onClick={async () => {
-            await logoutMutation()
-          }}
-        >
-          Logout
-        </button>
-        <div>
-          User id: <code>{currentUser.id}</code>
-          <br />
-          User role: <code>{currentUser.role}</code>
-        </div>
-      </>
-    )
-  } else {
-    return (
-      <>
-        <Link href={Routes.SignupPage()}>
-          <a className="button small">
-            <strong>Sign Up</strong>
-          </a>
-        </Link>
-        <Link href={Routes.LoginPage()}>
-          <a className="button small">
-            <strong>Login</strong>
-          </a>
-        </Link>
-      </>
-    )
-  }
-}
+//   if (currentUser) {
+//     return (
+//       <>
+//         <button
+//           className="button small"
+//           onClick={async () => {
+//             await logoutMutation()
+//           }}
+//         >
+//           Logout
+//         </button>
+//         <div>
+//           User id: <code>{currentUser.id}</code>
+//           <br />
+//           User role: <code>{currentUser.role}</code>
+//         </div>
+//       </>
+//     )
+//   } else {
+//     return (
+//       <>
+//         <Link href={Routes.SignupPage()}>
+//           <a className="button small">
+//             <strong>Sign Up</strong>
+//           </a>
+//         </Link>
+//         <Link href={Routes.LoginPage()}>
+//           <a className="button small">
+//             <strong>Login</strong>
+//           </a>
+//         </Link>
+//       </>
+//     )
+//   }
+// }
 
 const Home: BlitzPage = () => {
   return (
     <div className="container">
+      <div id="particlesdiv">
+        <div id="moondiv">
+          <Image src={moon} alt="moon image in corner" />
+        </div>
+        <Particles
+          width={"100%"}
+          height={"100%"}
+          params={{
+            particles: {
+              number: { value: 50, density: { enable: true, value_area: 800 } },
+              color: { value: "#ffffff" },
+              shape: {
+                type: "circle",
+                stroke: { width: 0, color: "#000000" },
+                polygon: { nb_sides: 5 },
+                image: { src: "img/github.svg", width: 100, height: 100 },
+              },
+              opacity: {
+                value: 0.5,
+                random: false,
+                anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false },
+              },
+              size: {
+                value: 10,
+                random: true,
+                anim: { enable: false, speed: 40, size_min: 0.1, sync: false },
+              },
+              line_linked: {
+                enable: true,
+                distance: 150,
+                color: "#ffffff",
+                opacity: 0.4,
+                width: 1,
+              },
+              move: {
+                enable: true,
+                speed: 6,
+                direction: "none",
+                random: false,
+                straight: false,
+                out_mode: "out",
+                bounce: false,
+                attract: { enable: false, rotateX: 600, rotateY: 1200 },
+              },
+            },
+            interactivity: {
+              detect_on: "canvas",
+              events: {
+                onhover: { enable: true, mode: "repulse" },
+                onclick: { enable: true, mode: "push" },
+                resize: true,
+              },
+              modes: {
+                grab: { distance: 400, line_linked: { opacity: 1 } },
+                bubble: { distance: 400, size: 40, duration: 2, opacity: 8 },
+                repulse: { distance: 200, duration: 0.4 },
+                push: { particles_nb: 4 },
+                remove: { particles_nb: 2 },
+              },
+            },
+            retina_detect: true,
+          }}
+        />
+      </div>
       <main>
-        <div className="logo">
-          <Image src={logo} alt="blitzjs" />
-        </div>
-        <p>
-          <strong>Congrats!</strong> Your app is ready, including user sign-up and log-in.
-        </p>
-        <div className="buttons" style={{ marginTop: "1rem", marginBottom: "1rem" }}>
-          <Suspense fallback="Loading...">
-            <UserInfo />
-          </Suspense>
-        </div>
-        <p>
-          <strong>
-            To add a new model to your app, <br />
-            run the following in your terminal:
-          </strong>
-        </p>
-        <pre>
-          <code>blitz generate all project name:string</code>
-        </pre>
-        <div style={{ marginBottom: "1rem" }}>(And select Yes to run prisma migrate)</div>
-        <div>
-          <p>
-            Then <strong>restart the server</strong>
-          </p>
-          <pre>
-            <code>Ctrl + c</code>
-          </pre>
-          <pre>
-            <code>blitz dev</code>
-          </pre>
-          <p>
-            and go to{" "}
-            <Link href="/projects">
-              <a>/projects</a>
-            </Link>
-          </p>
-        </div>
-        <div className="buttons" style={{ marginTop: "5rem" }}>
-          <a
-            className="button"
-            href="https://blitzjs.com/docs/getting-started?utm_source=blitz-new&utm_medium=app-template&utm_campaign=blitz-new"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-          <a
-            className="button-outline"
-            href="https://github.com/blitz-js/blitz"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Github Repo
-          </a>
-          <a
-            className="button-outline"
-            href="https://discord.blitzjs.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Discord Community
-          </a>
-        </div>
+        <h1 id="mainhdr">SPACE CAMP</h1>
+        {/* <h1>Coming Soon!</h1> */}
       </main>
-
-      <footer>
-        <a
-          href="https://blitzjs.com?utm_source=blitz-new&utm_medium=app-template&utm_campaign=blitz-new"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by Blitz.js
-        </a>
-      </footer>
-
+      +
+      {/* <footer>
+          Powered by ivanthadev and Blitzjs
+      </footer> */}
       <style jsx global>{`
         @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;700&display=swap");
-
+        @import url("https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap");
         html,
         body {
           padding: 0;
@@ -146,6 +142,26 @@ const Home: BlitzPage = () => {
           -moz-osx-font-smoothing: grayscale;
           box-sizing: border-box;
         }
+        #moondiv {
+          position: absolute;
+          right: -187px;
+          top: -76px;
+        }
+        #particlesdiv {
+          background: rgb(2, 0, 36);
+          background: linear-gradient(
+            24deg,
+            rgba(2, 0, 36, 1) 0%,
+            rgba(9, 9, 121, 1) 68%,
+            rgba(0, 212, 255, 1) 100%
+          );
+          position: fixed;
+          z-index: 1;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        }
         .container {
           min-height: 100vh;
           display: flex;
@@ -156,11 +172,27 @@ const Home: BlitzPage = () => {
 
         main {
           padding: 5rem 0;
+          z-index: 2;
           flex: 1;
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: center;
+        }
+
+        main h1 {
+          font-family: "Rammetto One", cursive;
+        }
+
+        #mainhdr {
+          font-size: 5em;
+          color: #fff;
+        }
+        #mainhdr::before {
+          position: absolute;
+          content: "Coming Soon..";
+          font-size: 50px;
+          transform: translateY(110%);
         }
 
         main p {
@@ -267,6 +299,6 @@ const Home: BlitzPage = () => {
 }
 
 Home.suppressFirstRenderFlicker = true
-Home.getLayout = (page) => <Layout title="Home">{page}</Layout>
+Home.getLayout = (page) => <Layout title="SpaceCamp|Home">{page}</Layout>
 
 export default Home
