@@ -90,7 +90,7 @@ const Home: BlitzPage = () => {
               },
               move: {
                 enable: true,
-                speed: 6,
+                speed: 3,
                 direction: "none",
                 random: false,
                 straight: false,
@@ -135,6 +135,13 @@ const Home: BlitzPage = () => {
           margin: 0;
           font-family: "Libre Franklin", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
             Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+          background: rgb(2, 0, 36);
+          background: linear-gradient(
+            24deg,
+            rgba(2, 0, 36, 1) 0%,
+            rgba(9, 9, 121, 1) 68%,
+            rgba(0, 212, 255, 1) 100%
+          );
         }
 
         * {
@@ -148,15 +155,8 @@ const Home: BlitzPage = () => {
           top: -76px;
         }
         #particlesdiv {
-          background: rgb(2, 0, 36);
-          background: linear-gradient(
-            24deg,
-            rgba(2, 0, 36, 1) 0%,
-            rgba(9, 9, 121, 1) 68%,
-            rgba(0, 212, 255, 1) 100%
-          );
           position: fixed;
-          z-index: 1;
+          z-index: 2;
           top: 0;
           bottom: 0;
           left: 0;
@@ -172,7 +172,7 @@ const Home: BlitzPage = () => {
 
         main {
           padding: 5rem 0;
-          z-index: 2;
+          z-index: 1;
           flex: 1;
           display: flex;
           flex-direction: column;
@@ -185,13 +185,14 @@ const Home: BlitzPage = () => {
         }
 
         #mainhdr {
-          font-size: 5em;
+          font-size: 10vw;
           color: #fff;
+          z-index: 0;
         }
         #mainhdr::before {
           position: absolute;
           content: "Coming Soon..";
-          font-size: 50px;
+          font-size: 7vw;
           transform: translateY(110%);
         }
 
